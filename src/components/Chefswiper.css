@@ -1,0 +1,127 @@
+.heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black; 
+    padding-top: 3rem;
+}
+
+
+.chef{
+    
+    min-height: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color:white ;
+    
+}
+
+.slide-container{
+    padding: 20px 0;
+    max-width: 1120px;
+    width: 100%;
+   
+    
+}
+.slide-content{
+   
+    margin: 0 40px;
+    background-color: white;
+    overflow: hidden;
+    border-radius: 25px;
+    
+
+}
+.card{
+    
+    height: 450px;
+    border-radius: 25px;  
+    row-gap: 0.1cm;  
+    background-color: rgb(245, 243, 244);
+}
+
+.image-content,
+.card-content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 14px;
+   
+    
+    
+}
+.image-content{
+    position: relative;
+    row-gap: 5px;
+    padding: 25px 0;
+   
+    
+}
+.ovrelay{
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(224, 30, 56, 0.737);
+    border-radius: 25px 25px 0 25px;
+}
+.ovrelay::before,
+.ovrelay::after{
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -40px;
+    height: 40px;
+    width: 40px;
+    background-color:rgba(224, 30, 56, 0.737);
+}
+.ovrelay::after{
+   border-radius: 0 25px 0 0;
+   background-color: rgb(245, 243, 244);
+}
+.card-image{
+    position: relative;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background: #e01e38bc;
+    padding: 3px;
+}
+.card-image .card-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgb(245, 243, 244);
+    
+}
+.name{
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+}
+.description{
+    font-size: 14px;
+    color: black;
+    text-align: center;
+}
+.chefbtn{
+    border: none;
+    font-size: 16px;
+    color: white;
+    background-color:  rgba(224, 30, 56, 0.737);
+    padding: 8px 16px;
+    border-radius:6px ;
+    margin: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.chefbtn:hover{
+    background: gainsboro;
+}
+.swiper-pagination-bullet{
+    background-color:  rgba(224, 30, 56, 0.737);
+    opacity: 1;
+}

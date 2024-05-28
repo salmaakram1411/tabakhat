@@ -1,0 +1,44 @@
+.home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: url('D:\graduation project\Tabakhat react\tabakhat-1\src\assets\home.png') no-repeat; /* Absolute path */
+    background-size: cover;
+    background-position: center;
+    background-color: rgb(245, 243, 244);
+}
+
+
+.home .content {
+    max-width: 60rem;
+}
+
+.home .content h3 {
+    padding-left: 0.5cm;
+    font-size: 5rem;
+    text-transform: capitalize;
+    color: black; 
+    margin-top: 4cm;
+    margin-bottom: 0.5rem;
+}
+
+.home .content p {
+    margin-left: 0.5cm;
+    font-size: 2rem;
+    font-weight: lighter;
+    line-height: 1.5;
+    padding: 1rem 0;
+    color: rgb(90, 90, 90);
+    margin-bottom: 1rem;
+}
+
+.home .content .btn {
+    padding: 0.8rem 1.3rem; 
+    font-size: 1.5rem;
+    margin-top: 3rem;
+    background-color: #e01e38bc;
+    border-radius: 3rem;
+    text-decoration: none;
+    color: white;
+    margin-left: 0.5cm;
+}

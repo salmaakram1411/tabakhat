@@ -1,61 +1,10 @@
-:root{
-    --font-color:#e01e37;
-    --main-color:#e01e38bc;
-    --main-bg:rgb(248, 249, 250);
-    --sec-bg:rgb(245, 243, 244);
-    --border:.1rem solid rgba(255,255,255,.3);
-    --sec-color:rgb(173, 181, 189) ;
-}
-*{
-    font-family: 'Roboto', sans-serif;
-    padding: 0;
-    margin: 0;
-    outline: none;
-    border:none ;
-    
-    box-sizing: border-box;
-   
-}
-html{
-    font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-padding-top:9rem;
-    scroll-behavior: smooth;
-}
-html::-webkit-scrollbar{
-    width: .8rem;
-}
-html::-webkit-scrollbar-track{
-    background: transparent;
-}
-html::-webkit-scrollbar-thumb{
-    background: var(--sec-color);
-    border-radius: 5rem;
-}
-body{
-    background: var(--main-bg);
-}
-.section{
-    padding: 2rem 7%;
-}
-.btn{
-    margin-top: 1rem;
-    display: inline-block;
-    padding: .9rem 3rem;
-    font-size: 1.7rem;
-    color: white;
-    background: var(--main-color);
-    cursor: pointer;
-}
-.btn:hover{
-    letter-spacing: .1rem;
-}
+
 .header {
     background: var(--main-bg);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5rem 7%;
+    
     border-bottom: var(--border);
     position: fixed;
     top: 0;
@@ -67,8 +16,9 @@ body{
   }
   
   .header .logo img {
-    height: 9em;
-    width: 18rem;
+    height: 5.5em;
+    width: 15rem;
+   
   }
     
   .header .navbar a {
@@ -192,5 +142,54 @@ body{
     text-align: center;
   }
 
+  @media (max-width: 991px) {
+    .html{
+      font-size: 50%;
+    }
+    .header {
+        padding: 1.5rem 1rem;
+    }
+    
+   
+}
+@media (max-width: 768px) {
+  #menu-btn {
+      display: inline-block;
+  }
+
+  .header .navbar {
+      position: absolute;
+      top: 100%;
+      right: -100%;
+      background: var(--sec-bg);
+      width: 35rem;
+      height: calc(100vh - 9.5rem);
+  }
+
+  .header .navbar.active {
+      right: 0;
+  }
+
+  .header .navbar a {
+      color: black;
+      display: block;
+      margin: 1.5rem;
+      padding: .5rem;
+      font-size: 2rem;
+  }
+  .header .search-form {
+    width: 90%;
+    right: 2rem;
+  }
+ 
+}
+@media (max-width: 450px) {
+  html {
+      font-size: 50%;
+  }
+ 
+
+  /* .header { padding: 1.5rem 2rem; } */
+}
 
 

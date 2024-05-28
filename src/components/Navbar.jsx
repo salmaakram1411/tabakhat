@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import './Navbar.css';
+import logo from '../assets/logo.png';
 
 function Navbar() {
   const [isNavbarActive, setIsNavbarActive] = useState(false);
@@ -39,18 +41,18 @@ function Navbar() {
 
   return (
     <header className="header">
-      <a href="/#" className="logo">
-        <img src="pic/logo-removebg2.png" alt="Logo" />
-      </a>
+      <Link to="/" className="logo">
+        <img src={logo} alt="Logo" />
+      </Link>
 
       <nav className={`navbar ${isNavbarActive ? 'active' : ''}`}>
-        <a href="#home">home</a>
-        <a href="#chef">chef</a>
-        <a href="#about">about</a>
-        <a href="#review">review</a>
-        <a href="#contact">contact us</a>
-        <a href="#join">join us</a>
-        <a href="#login">login</a>
+        <Link to="/">home</Link>
+        <Link to="/chef">chef</Link>
+        <Link to="/about">about</Link>
+        <Link to="/review">review</Link>
+        <Link to="/contact">contact us</Link>
+        <Link to="/join">join us</Link>
+        <Link to="/login">login</Link>
       </nav>
 
       <div className="icons">
@@ -91,12 +93,10 @@ function Navbar() {
             <div className="price">$15/-</div>
           </div>
         </div>
-        <a href="/#" className="btn">checkout now</a>
+        <Link to="/checkout" className="btn">checkout now</Link>
       </div>
     </header>
   );
 }
 
 export default Navbar;
-
-
