@@ -1,10 +1,12 @@
 import React from 'react';
 import './Home.css';
-
+import homep from '../assets/home.png';
+import Chefswiper from '../components/Chefswiper.js'; // Correct case
 
 function Home() {
   return (
-    <section className="home" id="home">
+  <div className='home'>
+    <div className="home-container" style={{ backgroundImage: `url(${homep})` }}>
       <div className="content">
         <h3>
           Experience The Warmth <br />Of Homemade Meals,<br />Anytime,
@@ -17,11 +19,11 @@ function Home() {
         </p>
         <a href="#chef" className="btn">Order Now</a>
       </div>
-      {/*  <Chefswiper /> Corrected component name/ import Chefswiper from './components/Chefswiper'; // Corrected import statement*/}
-    </section>
+      
+    </div>
+    <Chefswiper />
+  </div>
   );
 }
 
 export default Home;
-
-

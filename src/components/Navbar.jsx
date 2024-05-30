@@ -53,6 +53,7 @@ function Navbar() {
         <Link to="/contact">contact us</Link>
         <Link to="/join">join us</Link>
         <Link to="/login">login</Link>
+        <Link to="/menu">menu</Link>
       </nav>
 
       <div className="icons">

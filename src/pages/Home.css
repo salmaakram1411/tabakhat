@@ -1,8 +1,8 @@
-.home {
+.home-container {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    background: url('D:\graduation project\Tabakhat react\tabakhat-1\src\assets\home.png') no-repeat; /* Absolute path */
+   
     background-size: cover;
     background-position: center;
     background-color: rgb(245, 243, 244);
