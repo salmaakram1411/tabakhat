@@ -42,3 +42,29 @@
     color: white;
     margin-left: 0.5cm;
 }
+.icons-container{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    gap: 1.5rem;
+    background-color: white;
+    padding: 50px;
+    
+}
+.icons-container .icons{
+    display: flex;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff4f3;
+}
+.icons-container .icons i{
+    font-size: 3.5rem;
+    color: var(--font-color);
+}
+.icons-container .icons h3{
+    font-size: 2rem;
+    color: black;
+    padding-bottom: .5rem;
+}
+

@@ -44,8 +44,9 @@ const Chefswiper = () => {
   return (
     <>
   <div>
-  <h1 className="heading">Our Chefs</h1>
+  <h1 className="swiperheading">Our Chefs</h1>
   <section className="chef" id="chef">
+    
     <div className="slide-container swiper">
       <div className="slide-content">
         <div className="card-wrapper swiper-wrapper">

@@ -82,13 +82,15 @@
 .nav-menu {
     display: flex;
     gap: 10px;
-    padding-top: 2rem;
+    padding-top: 3rem;
     padding-bottom: 0.1rem;
     overflow-x: auto;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap; /* Allows wrapping of items on smaller screens */
   }
+
+
   
   .nav-menu a {
     text-decoration: none;
@@ -97,16 +99,23 @@
     border-radius: 20px;
     min-width: 120px;
     display: flex;
-    font-size: 1.1em;
+    font-size: 1.3rem;
     padding: 0.5rem 0;
-    color: black;
+    color: white;
     background-color: rgba(224, 30, 56, 0.737);
   }
   
   .nav-menu a:hover {
     background-color: rgb(245, 243, 244);
+    color: var(--font-color);
   }
-  
+  .heading{
+    font-size: 20px;
+    text-align: center;
+    justify-content: center;
+    padding: 15px;
+    padding-top: 50px;
+  }
   .menu .box-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);  /* Ensure three columns */
@@ -114,6 +123,7 @@
     width: 70%;
     margin: 0 auto;
     max-width: 1200px;
+    padding-bottom: 30px;
   }
   
   .menu .box-container .box {
@@ -146,6 +156,9 @@
     .menu .box-container {
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     }
+   /* .menu .box-container {
+      grid-template-columns: repeat(auto-fit, minmax(15rem, 2fr));
+      }*/
     .chefP-text .star {
         margin-top: 1.5cm;
     }
@@ -160,6 +173,7 @@
     .chefP-text {
     padding-top: 2rem;
     }
+   
     .nav-menu {
         flex-direction: row; /* Maintain row direction */
         flex-wrap: wrap; /* Wrap items */
