@@ -24,39 +24,29 @@ function Home() {
       
     </div>
     <div className='icons-container'>
-
-
-    <div className='icons'>
-    <i className="fa-solid fa-cake-candles"/>
-
-
-        <div className='icons-content'>
-          <h3>party orders</h3>
-        </div>
-        </div>
-
-        <div className='icons'>
-        <i className="fa-solid fa-truck" />
-        <div className='icons-content'>
-          <h3>Home delivery</h3>
-        </div>
-        </div>
-
-        <div className='icons'>
-        <i className="fa-solid fa-credit-card" />
-        <div className='icons-content'>
-          <h3>multiple payment method</h3>
-        </div>
-        </div>
-
-        <div className='icons'>
-        <i className="fa-solid fa-headset" />
-        <div className='icons-content'>
-          <h3>customer support</h3>
-        </div>
-        </div>
-        
-        
+      <h1>Our service</h1>
+    <div className='icons-row'>
+      <div className='service'>
+      <i className="fa-solid fa-cake-candles"/>
+      <h2>party orders</h2>
+      <p>Make your gatherings memorable with our delicious homemade party orders, tailored to delight every guest</p>
+      </div>
+      <div className='service'>
+      <i className="fa-solid fa-shield" />
+      <h2>Reliability</h2>
+      <p>Count on us for consistent, high-quality meals that bring the comfort of home-cooked food to your table, every time</p>
+      </div>
+      <div className='service'>
+      <i className="fa-solid fa-truck" />
+      <h2>Home delivery</h2>
+      <p>Enjoy timely and efficient delivery, ensuring your meals arrive fresh and ready to savor, no matter where you are</p>
+      </div>
+      <div className='service'>
+      <i className="fa-solid fa-headset" />
+      <h2>customer support</h2>
+      <p>Experience exceptional customer support, always here to assist you and ensure your satisfaction with every order</p>
+      </div>
+        </div>        
         
         
 

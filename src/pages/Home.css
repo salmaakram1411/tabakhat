@@ -2,10 +2,10 @@
     min-height: 100vh;
     display: flex;
     align-items: center;
-   
     background-size: cover;
     background-position: center;
     background-color: rgb(245, 243, 244);
+ 
 }
 
 
@@ -42,29 +42,131 @@
     color: white;
     margin-left: 0.5cm;
 }
-.icons-container{
+.icons-container {
+    width: 100%;
+    padding: 0 8%;
+    box-sizing: border-box;
+    margin-bottom: 5rem;
+}
+
+.icons-container h1 {
+    text-align: center;
+    font-size: 3rem;
+    padding-top: 5rem;
+    margin-bottom: 60px;
+    font-weight: 600;
+    position: relative;
+}
+
+.icons-container h1::after {
+    content: '';
+    background: var(--font-color);
+    width: 100px;
+    height: 5px;
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.icons-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-    gap: 1.5rem;
-    background-color: white;
-    padding: 50px;
-    
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 30px;
 }
-.icons-container .icons{
-    display: flex;
-    gap: 1.5rem;
-    padding: 2rem 0;
-    justify-content: center;
-    align-items: center;
-    background-color: #fff4f3;
+
+.service {
+    text-align: center;
+    padding: 25px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    background: transparent;
+    transition: transform 0.5s, background 0.5s;
 }
-.icons-container .icons i{
-    font-size: 3.5rem;
+
+.service i {
+    font-size: 40px;
+    margin-bottom: 10px;
     color: var(--font-color);
 }
-.icons-container .icons h3{
-    font-size: 2rem;
-    color: black;
-    padding-bottom: .5rem;
+
+.service h2 {
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.service:hover {
+    background: #e01e38bc;
+    color: white;
+    transform: scale(1.05);
+}
+
+.service:hover i {
+    color: #fad0cd;
+}
+
+@media (max-width: 768px) {
+    .icons-container {
+        padding: 0 5%;
+    }
+
+    .icons-container h1 {
+        padding-top: 20%;
+        margin-bottom: 40px;
+        font-size: 1.5rem;
+    }
+
+    .icons-row {
+        grid-gap: 20px;
+    }
+
+    .service {
+        padding: 20px 8px;
+    }
+
+    .service i {
+        font-size: 35px;
+    }
+
+    .service h2 {
+        font-size: 1.2rem;
+    }
+
+    .service p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .icons-container {
+        padding: 0 3%;
+    }
+
+    .icons-container h1 {
+        padding-top: 25%;
+        margin-bottom: 30px;
+        font-size: 1.2rem;
+    }
+
+    .icons-row {
+        grid-gap: 15px;
+    }
+
+    .service {
+        padding: 15px 5px;
+    }
+
+    .service i {
+        font-size: 30px;
+    }
+
+    .service h2 {
+        font-size: 1rem;
+    }
+
+    .service p {
+        font-size: 0.8rem;
+    }
 }
 

@@ -1,26 +1,35 @@
 import React from 'react'
 import './About.css';
-import about from '../assets/pane.jpg';
+import about from '../assets/about.jpg';
 
-const About = () => {
-  return (
-    
-      <div className="hero">
-        <div className="heading">
-          <h1>About Us</h1>
-        </div>
-        <div className="containerr">
-          <div className="hero-content">
-            <h2>hello.</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sapiente perspiciatis iure possimus rerum ipsum sed repellat? Provident iste fuga, eaque facilis consequatur labore ab quae. Nostrum obcaecati eius in magnam?</p>
-          </div>
-          <div className="hero-image">
-            <img src={about} alt='about' />
-          </div>
+
+function About(){
+  return(
+    <div className='about-component'>
+
+    <div className='about-row'>
+      <div className='about-image' >
+        <img src={about} alt='about'/>
+      </div>
+      <div className='contentWrapper'>
+        <div className='about-content'>
+          <span className='textWrapper'>
+            <span> About </span>
+          </span>
+          <h2>Tabakhat</h2>
+          <p>Our website is designed to bring the warmth and flavors of homemade meals 
+  directly to your doorstep. This innovative website acts as a culinary 
+  marketplace, connecting passionate home cooks with individuals seeking the 
+  wholesome goodness of homemade meals.<br /> <br />
+  Also, we provide a "Special Events Order" feature, allowing users to place 
+  large orders tailored for special occasions such as birthdays, engagements, 
+  and other events.</p>
+
         </div>
       </div>
-   
+    </div>
+    </div>
+
   );
 }
-
 export default About;
