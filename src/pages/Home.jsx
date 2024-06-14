@@ -3,6 +3,7 @@ import './Home.css';
 import About from '../components/About';
 import homep from '../assets/home.png';
 import Chefswiper from '../components/Chefswiper.js'; // Correct case
+import Joinus from '../components/Joinus.jsx';
 
 function Home() {
   return (
@@ -58,6 +59,7 @@ function Home() {
       </div>
     <Chefswiper />
     <About />
+    <Joinus />
   </div>
   );
 }

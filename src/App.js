@@ -1,15 +1,13 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
-
+import Signupchef from './pages/Signupchef';
 import Contact from './pages/Contact';
-import Join from './pages/Join';
 import Login from './pages/Login';
-import Menu from './pages/Menu';
+import Menu from './pages/Menu'; // Import Menu component
 import './App.css';
 import Navbar from './components/Navbar';
-
 import Footer from './components/Footer'; // Import Footer
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
@@ -19,16 +17,16 @@ function App() {
         <Route path="/" element={<Home />} /> {/* Set index route to Home */}
         <Route path="/Home" element={<Home />} />
         <Route path="/Contact" element={<Contact />} /> {/* Correct path to "Contact" */}
-        <Route path="/Join" element={<Join />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/Menu" element={<Menu />} />
+        <Route path="/Menu" element={<Menu />} /> {/* Menu route defined */}
+        <Route path="/Signupchef" element={<Signupchef />} /> {/* Add the SignUp route */}
         {/* Add more routes here as needed */}
       </Routes>
-      
       <Footer /> {/* Place Footer within the BrowserRouter */}
     </BrowserRouter>
-  
   );
 }
 
 export default App;
+
+

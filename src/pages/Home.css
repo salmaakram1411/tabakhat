@@ -47,6 +47,7 @@
     padding: 0 8%;
     box-sizing: border-box;
     margin-bottom: 5rem;
+    background-color: white;
 }
 
 .icons-container h1 {
@@ -83,6 +84,7 @@
     cursor: pointer;
     background: transparent;
     transition: transform 0.5s, background 0.5s;
+   
 }
 
 .service i {
@@ -97,13 +99,12 @@
 }
 
 .service:hover {
-    background: #e01e38bc;
-    color: white;
+    background: #fff4f3;
     transform: scale(1.05);
 }
 
 .service:hover i {
-    color: #fad0cd;
+    color: var(--font-color);
 }
 
 @media (max-width: 768px) {
@@ -114,7 +115,7 @@
     .icons-container h1 {
         padding-top: 20%;
         margin-bottom: 40px;
-        font-size: 1.5rem;
+        font-size: 2.7rem;
     }
 
     .icons-row {
@@ -123,18 +124,23 @@
 
     .service {
         padding: 20px 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .service i {
-        font-size: 35px;
+        font-size: 40px;
     }
 
     .service h2 {
-        font-size: 1.2rem;
+        font-size: 1.8rem;
     }
 
     .service p {
-        font-size: 0.9rem;
+        font-size: 1.5rem;
+        max-width: 30rem;
+        margin: 0 auto;
     }
 }
 
@@ -146,7 +152,7 @@
     .icons-container h1 {
         padding-top: 25%;
         margin-bottom: 30px;
-        font-size: 1.2rem;
+        font-size: 2.7rem;
     }
 
     .icons-row {
@@ -155,18 +161,30 @@
 
     .service {
         padding: 15px 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
     .service i {
-        font-size: 30px;
+        font-size: 40px;
     }
 
     .service h2 {
-        font-size: 1rem;
+        font-size: 1.8rem;
     }
 
     .service p {
-        font-size: 0.8rem;
+        font-size: 1.5rem;
+        max-width: 30rem;
+        margin: 0 auto;
     }
 }
+
+
+
+
+
+
+
 

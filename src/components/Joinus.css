@@ -1,0 +1,113 @@
+.hero {
+    overflow: hidden;
+    padding: 1rem 10rem;
+}
+
+.join-heading h1 {
+    color: #000;
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 35px;
+    position: relative; /* Ensure the parent element is positioned */
+}
+
+.join-heading h1::after {
+    content: '';
+    background: var(--font-color); /* Assuming --font-color is defined elsewhere */
+    width: 75px;
+    height: 5px;
+    position: absolute;
+    bottom: -10px; /* Adjust this value as needed to position it correctly */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.join-container {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    margin: 65px auto;
+}
+
+.hero-content {
+    flex: 1;
+    width: 600px;
+    margin: 0px 25px;
+    animation: fadeInUp 0.5s ease;
+}
+
+.hero-content h2 {
+    font-size: 30px;
+    font-weight: 700;
+    color: black;
+    padding-bottom: 20px;
+}
+
+.hero-content p {
+    color: black;
+    font-size: 16px;
+    line-height: 25px;
+    padding-bottom: 25px;
+}
+.hero-content button{
+    display: inline-block;
+    background-color:var(--main-color);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 14px;
+
+}
+
+.hero-video{
+    
+    flex: 1;
+    width: auto;
+}
+
+video {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+@media (max-width: 992px) {
+    .join-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero-content, .hero-video {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-content {
+        padding: 0;
+    }
+
+    .hero-video {
+        margin-top: 4rem; /* Increase margin to create more space */
+    }
+}
+
+@media (max-width: 576px) {
+    .joinbtn {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+}

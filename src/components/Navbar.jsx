@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../assets/logo.png';
+import egg from '../assets/fried-egg.jpg';
 
 function Navbar() {
   const [isNavbarActive, setIsNavbarActive] = useState(false);
   const [isSearchFormActive, setIsSearchFormActive] = useState(false);
   const [isCartItemsActive, setIsCartItemsActive] = useState(false);
+  const [cartItems, setCartItems] = useState([
+    { id: 1, name: 'Fried Egg', price: 25, imgSrc: egg, quantity: 1 },
+    { id: 2, name: 'cart item 02', price: 15, imgSrc: 'pic/pane.jpg', quantity: 1 },
+    { id: 3, name: 'cart item 03', price: 30, imgSrc: 'pic/kofta.jpg', quantity: 1 },
+  ]);
+
+  const navigate = useNavigate();
 
   const toggleNavbar = () => {
     setIsNavbarActive(!isNavbarActive);
@@ -39,6 +47,32 @@ function Navbar() {
     };
   }, []);
 
+  const handleNavigation = (path, hash) => {
+    navigate(path);
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 0);
+    }
+  };
+
+  const handleIncreaseQuantity = (itemId) => {
+    setCartItems(cartItems.map(item => 
+      item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
+    ));
+  };
+
+  const handleDecreaseQuantity = (itemId) => {
+    setCartItems(cartItems.map(item => 
+      item.id === itemId && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
+    ));
+  };
+
+  const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+
   return (
     <header className="header">
       <Link to="/" className="logo">
@@ -46,14 +80,11 @@ function Navbar() {
       </Link>
 
       <nav className={`navbar ${isNavbarActive ? 'active' : ''}`}>
-        <Link to="/">home</Link>
-        <Link to="/chef">chef</Link>
-        <Link to="/about">about</Link>
-        <Link to="/review">review</Link>
-        <Link to="/contact">contact us</Link>
-        <Link to="/join">join us</Link>
-        <Link to="/login">login</Link>
-        <Link to="/menu">menu</Link>
+        <Link to="/">Home</Link>
+        <a href="#chefs" onClick={() => handleNavigation('/', 'chefs')}>Chefs</a>
+        <a href="#about" onClick={() => handleNavigation('/', 'about')}>About</a>
+        <Link to="/contact">Contact</Link>
+        <Link to="/login">Login</Link>
       </nav>
 
       <div className="icons">
@@ -68,31 +99,23 @@ function Navbar() {
       </div>
 
       <div className={`cart-items-container ${isCartItemsActive ? 'active' : ''}`}>
-        <div className="cart-item">
-          <span className="fas fa-times"></span>
-          <img src="pic/ma7shi.jpg" alt="Cart item 1" />
-          <div className="content">
-            <h3>cart item 01</h3>
-            <div className="price">$15/-</div>
+        {cartItems.map(item => (
+          <div className="cart-item" key={item.id}>
+            <span className="fas fa-times"></span>
+            <img src={item.imgSrc} alt={item.name} />
+            <div className="content">
+              <h3>{item.name}</h3>
+              <div className="price">EGP{item.price}</div>
+              <div className="quantity">
+                <button onClick={() => handleDecreaseQuantity(item.id)}>-</button>
+                <span>{item.quantity}</span>
+                <button onClick={() => handleIncreaseQuantity(item.id)}>+</button>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div className="cart-item">
-          <span className="fas fa-times"></span>
-          <img src="pic/pane.jpg" alt="Cart item 2" />
-          <div className="content">
-            <h3>cart item 02</h3>
-            <div className="price">$15/-</div>
-          </div>
-        </div>
-
-        <div className="cart-item">
-          <span className="fas fa-times"></span>
-          <img src="pic/kofta.jpg" alt="Cart item 3" />
-          <div className="content">
-            <h3>cart item 03</h3>
-            <div className="price">$15/-</div>
-          </div>
+        ))}
+        <div className="total">
+          <h3>Total Price: EGP{totalPrice}</h3>
         </div>
         <Link to="/checkout" className="btn">checkout now</Link>
       </div>
