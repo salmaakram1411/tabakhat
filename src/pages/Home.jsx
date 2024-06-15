@@ -5,11 +5,12 @@ import homep from '../assets/home.png';
 import Chefswiper from '../components/Chefswiper.js'; // Correct case
 import Joinus from '../components/Joinus.jsx';
 
+
 function Home() {
   return (
     
   <div className='home'>
-    <div className="home-container" style={{ backgroundImage: `url(${homep})` }}>
+    <div className="home-container" >
       <div className="content">
         <h3>
           Experience The Warmth <br />Of Homemade Meals,<br />Anytime,
@@ -60,6 +61,7 @@ function Home() {
     <Chefswiper />
     <About />
     <Joinus />
+  
   </div>
   );
 }

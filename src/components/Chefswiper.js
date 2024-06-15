@@ -57,9 +57,10 @@ const Chefswiper = () => {
                   <div className="card-content">
                     <h2 className="name">Asmaa Oraby</h2>
                     <p className="description">
-                      Specializes in traditional Egyptian cuisine like koshari and
-                      molokhia, bringing 15 years of culinary experience to your
-                      table.
+                    A passionate home chef with a flair for both baking and cooking.
+            Specializing in a fusion of sweet and savory flavors, she offers a
+            diverse menu of homemade delights, from indulgent cakes and pastries
+            to flavorful Egyptian-inspired dishes.
                     </p>
                     <Link to="/menu" className="chefbtn">Check Menu</Link>
                   </div>

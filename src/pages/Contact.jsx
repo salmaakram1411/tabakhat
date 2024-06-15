@@ -11,7 +11,8 @@ function Contact() {
           <hr />
         </div>
         <input type="hidden" name="access_key" defaultValue="b393d815-49c1-42ea-975d-fc56f365e7df" />
-        <input type="text" name="name" placeholder="Your Name" className="contact-inputs" required />
+
+        <input type="text" name="texr" placeholder="Your Name" className="contact-inputs" required />
         <input type="email" name="email" placeholder="Your Email" className="contact-inputs" required />
         <textarea name="message" placeholder="Your Message" className="contact-inputs" required defaultValue={""} />
         <button type="submit">Submit</button> {/* Fixed the typo here */}

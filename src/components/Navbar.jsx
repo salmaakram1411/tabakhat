@@ -114,6 +114,7 @@ function Navbar() {
             </div>
           </div>
         ))}
+        
         <div className="total">
           <h3>Total Price: EGP{totalPrice}</h3>
         </div>

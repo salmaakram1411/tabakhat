@@ -11,7 +11,7 @@ const Joinus = () => {
     };
 
     return (
-        <div className="hero">
+        <div className="join">
             <div className="join-heading">
                 <h1>Join Us</h1>
             </div>

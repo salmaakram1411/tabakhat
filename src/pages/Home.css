@@ -5,6 +5,8 @@
     background-size: cover;
     background-position: center;
     background-color: rgb(245, 243, 244);
+    background-image: url('../assets/home.png');
+
  
 }
 
@@ -14,7 +16,7 @@
 }
 
 .home .content h3 {
-    padding-left: 0.5cm;
+    padding: 2rem;
     font-size: 5rem;
     text-transform: capitalize;
     color: black; 
@@ -25,10 +27,9 @@
 .home .content p {
     margin-left: 0.5cm;
     font-size: 2rem;
-    font-weight: lighter;
     line-height: 1.5;
     padding: 1rem 0;
-    color: rgb(90, 90, 90);
+    color: rgba(29, 29, 29, 0.621);
     margin-bottom: 1rem;
 }
 
@@ -108,6 +109,29 @@
 }
 
 @media (max-width: 768px) {
+    .home-container{
+        background-image:none;
+    }
+    .home .content {
+        padding: 0 1rem; /* Adjust padding for smaller screens */
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+    }
+
+    .home .content h3 {
+        font-size: 3.5rem; /* Adjust font size for smaller screens */
+        margin-top: 2rem; /* Adjust margin for smaller screens */
+    }
+
+    .home .content p {
+        font-size: 1.5rem; /* Adjust font size for smaller screens */
+    }
+
+    .home .content .btn {
+        font-size: 1.3rem; /* Adjust font size for smaller screens */
+        margin-top: 2rem; /* Adjust margin for smaller screens */
+    }
     .icons-container {
         padding: 0 5%;
     }

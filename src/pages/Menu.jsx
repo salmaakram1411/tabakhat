@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import Modal from 'react-modal';
 import { BsStarFill, BsStarHalf } from 'react-icons/bs';
+import { FaTimes } from 'react-icons/fa';
 import './Menu.css';
 import Chef from '../assets/asmaa.PNG';
 import egg from '../assets/fried-egg.jpg';
@@ -20,7 +22,7 @@ const menuData = {
     },
     {
       img: 'pic/club-sandwiche.jpg',
-      name: 'Club Sandwiche',
+      name: 'Club Sandwich',
       description: 'Enjoy our classic Club Sandwich, served with a side of crispy fries and a pickle spear.',
       price: 'EGP 90',
     },
@@ -84,11 +86,37 @@ const menuData = {
   // Add other categories similarly
 };
 
+const reviews = [
+  {
+    name: "John Doe",
+    review: "The food was absolutely wonderful, from preparation to presentation, very pleasing.",
+    rating: 5
+  },
+  {
+    name: "Jane Smith",
+    review: "Great experience, the service was excellent and the food was delicious!",
+    rating: 4.5
+  },
+ 
+
+  
+  // Add more reviews here
+];
+
 function Menu() {
   const [selectedCategory, setSelectedCategory] = useState('Breakfast');
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const handleFilterChange = (category) => {
     setSelectedCategory(category);
+  };
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
   };
 
   return (
@@ -111,6 +139,7 @@ function Menu() {
             diverse menu of homemade delights, from indulgent cakes and pastries
             to flavorful Egyptian-inspired dishes.
           </p>
+          <h2 onClick={openModal} style={{ cursor: 'pointer' }}>(Reviews)</h2>
           <a href="#menu" className="btn">Check menu</a>
         </div>
         <div className="chefP-img">
@@ -124,7 +153,6 @@ function Menu() {
           <a href="#s" onClick={() => handleFilterChange('Dinner')}>Dinner</a>
           <a href="#s" onClick={() => handleFilterChange('Desserts')}>Desserts</a>
           <a href="#s" onClick={() => handleFilterChange('Occasions')}>Occasions</a>
-          <a href="#s" onClick={() => handleFilterChange('Feedback')}>Feedback</a>
         </div>
         <div className="menu-items">
           {Object.keys(menuData).map((category) => (
@@ -133,7 +161,6 @@ function Menu() {
               style={{ display: selectedCategory === category ? 'block' : 'none' }}
               key={category}
             >
-             
               <h1 className="heading">{category}</h1>
               <div className="box-container">
                 {menuData[category].map((item, index) => (
@@ -142,7 +169,7 @@ function Menu() {
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
                     <div className="price">{item.price}</div>
-                    <a href="#s1" className="btn">add to cart</a>
+                    <a href="#s1" className="box-btn">Add to cart</a>
                   </div>
                 ))}
               </div>
@@ -150,6 +177,25 @@ function Menu() {
           ))}
         </div>
       </section>
+
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Reviews Modal" className="modal" overlayClassName="modal-overlay">
+        <h2>Customer Reviews</h2>
+        <FaTimes onClick={closeModal} className="close-icon" />
+        <div className="reviews">
+          {reviews.map((review, index) => (
+            <div className="review" key={index}>
+              <h3>{review.name}</h3>
+              <p>{review.review}</p>
+              <div className="rating">
+                {[...Array(Math.floor(review.rating))].map((_, i) => (
+                  <BsStarFill key={i} />
+                ))}
+                {review.rating % 1 !== 0 && <BsStarHalf />}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Modal>
     </>
   );
 }

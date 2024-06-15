@@ -54,29 +54,32 @@
     font-style: normal;
     
   }
-  
   .chefP-text span {
     color: rgb(224, 30, 55);
     font-size: 3.5rem;
   }
-  
+  .chefP-text h2 {
+    font-size: 1.5rem;
+    color: var(--font-color);
+    font-optical-sizing: auto;
+    font-style: normal;
+    padding-bottom: 2rem;
+    
+  }
   .chefP-text p {
-    max-width: 70%;
-    font-size: 1.3rem;
-    margin: 1rem 0 1.1rem;
-    padding-bottom: 1rem;
+    max-width: 75%;
+    font-size: 1.4rem;
+    margin: 2rem 0 1.1rem;
+    padding-bottom: 0.2rem;
   }
   
   .btn {
+    font-size: 1.5rem;
     background: var(--main-color);
     display: inline-block;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border-radius: 2rem;
     color: #fff;
-}
-
-.btn:hover {
-    background: #fc5552;
 }
 
 .nav-menu {
@@ -100,7 +103,7 @@
     min-width: 120px;
     display: flex;
     font-size: 1.3rem;
-    padding: 0.5rem 0;
+    padding: 0.6rem 0;
     color: white;
     background-color: rgba(224, 30, 56, 0.737);
   }
@@ -142,14 +145,103 @@
   .menu .box-container .box h3 {
     color: #000;
     font-size: 1.8rem;
+    padding-top: 0.5rem;
   }
-  
+  .menu .box-container .box p{
+    color: #000;
+    font-size: 1.3rem;
+    padding: 1rem;
+    
+  }
   .menu .box-container .box .price {
     color: #000;
     font-size: 1.6rem;
     padding: 1rem 0;
   }
-  
+  .box-btn {
+    font-size: 1.2rem;
+    background: var(--main-color);
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 2rem;
+    color: #fff;
+}
+.box-btn:hover{
+  letter-spacing: .1rem;
+}
+
+  /* Menu.css */
+
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.75);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-height: 80%; /* Set the maximum height of the modal */
+  overflow-y: auto; /* Enable vertical scroll when content exceeds max-height */
+}
+.modal::-webkit-scrollbar{
+  width: .8rem;
+}
+.modal::-webkit-scrollbar-track{
+  background: transparent;
+}
+.modal::-webkit-scrollbar-thumb{
+  background: var(--sec-color);
+  border-radius: 5rem;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #888;
+}
+.close-icon:hover {
+  color: var(--font-color);
+}
+
+.modal h2{
+ 
+  color:var(--font-color);
+  justify-content: center;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+.review {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+.review h3{
+  font-size: 1.3rem;
+}
+.review p{
+  font-size: 1.2rem;
+}
+.rating {
+  color: #f5c518;
+}
+
 
   /* For screens up to 1024px wide */
 @media (max-width: 1024px) {

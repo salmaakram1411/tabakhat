@@ -1,6 +1,7 @@
-.hero {
+.join {
     overflow: hidden;
     padding: 1rem 10rem;
+  
 }
 
 .join-heading h1 {
@@ -47,9 +48,10 @@
 
 .hero-content p {
     color: black;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 25px;
     padding-bottom: 25px;
+   
 }
 .hero-content button{
     display: inline-block;
@@ -90,6 +92,12 @@ video {
 
     .hero-content {
         padding: 0;
+      
+    }
+    .join-container .hero-content p{
+        font-size: 1.4rem;
+        font-weight: 400;
+      
     }
 
     .hero-video {

@@ -12,6 +12,7 @@
     font-family: 'outfit';
     background: linear-gradient(135deg, #e01e37,#f5f3f4 );
 }
+
 .contact-left{
     display: flex;
     flex-direction: column;

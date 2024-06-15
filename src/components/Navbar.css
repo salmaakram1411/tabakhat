@@ -153,6 +153,7 @@
     bottom: 160px;
     position: absolute;
     width: 90%;
+    color: #000;
     
   }
 
@@ -165,9 +166,10 @@
     padding: 10px ;
     justify-content: center;
     text-align: center;
-    bottom: 100px;
+    bottom:15%;
     position: absolute;
   }
+  
 
   .quantity {
     display: flex;
@@ -193,6 +195,7 @@
   .quantity span {
     min-width: 20px;
     text-align: center;
+    color: #000;
   }
   
 

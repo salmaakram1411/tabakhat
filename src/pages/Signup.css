@@ -5,20 +5,36 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 20px; /* Added padding for smaller screens */
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #e01e37, #f5f3f4);
 }
 
 .sign-container {
-  width: 70%;
-  background-color: #f0f0f0;
+  margin-top: 98px;
+  width: 100%; /* Full width for smaller screens */
+  max-width: 500px; /* Limit max width */
+  background-color: #f0f0f00f;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.sign-container header {
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  color: white;
+}
+
 .progress-bar {
+  color: white;
   display: flex;
   justify-content: space-between; /* Ensures items are evenly spaced */
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow-x: auto; /* Enable horizontal scrolling if needed */
 }
 
 .step {
@@ -26,6 +42,8 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  flex: 1; /* Flex property for equal spacing */
+  min-width: 70px; /* Ensure minimum width for each step */
 }
 
 .step p {
@@ -36,7 +54,7 @@
 .bullet {
   width: 20px;
   height: 20px;
-  background-color: #ccc;
+  background-color: #d3c0c0e7;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -51,7 +69,7 @@
 .check {
   width: 16px;
   height: 16px;
-  background-color: #00c853;
+  background-color: var(--font-color);
   border-radius: 50%;
   position: absolute;
   top: 0;
@@ -60,7 +78,7 @@
 }
 
 .active {
-  color: #00c853;
+  color: var(--font-color);
 }
 
 .form-outer {
@@ -75,51 +93,117 @@
   display: block;
 }
 
-.title {
-  font-size: 20px;
+.sign-title {
+  font-size: 19px;
   font-weight: bold;
   margin-bottom: 10px;
+  color: lavender;
 }
 
 .field {
   margin-bottom: 15px;
 }
 
-.label {
-  font-size: 16px;
+.sign-label {
+  font-size: 14px;
   margin-bottom: 5px;
+  font-weight: 500;
+  color: white;
+}
+.signup-input option {
+  color: black; /* Set the color of option text */
+}
+.signup-input option:hover {
+  background-color: red; /* Background color when hovered */
 }
 
-input[type="text"],
-input[type="password"],
-input[type="number"],
-select {
+
+
+.signup-input {
+  color: white;
   width: 100%;
   padding: 8px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 2px solid lavender;
+  border-radius: 15px;
+  background: transparent;
 }
 
 .btns {
   display: flex;
   justify-content: space-between;
-}
-
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
+  
 }
 
 .prev,
 .next {
-  background-color: #f0f0f0;
-}
-
-.submit {
-  background-color: #00c853;
+  background-color: var(--main-color);
+  padding: 8px 28px;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 3rem;
   color: white;
 }
+
+.signup-submit{
+  background-color: var(--main-color);
+  padding: 8px 28px;
+  font-size: 1.5rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 3rem;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .sign-container {
+    width: 80%; /* Adjust width for tablet devices */
+  }
+
+  .progress-bar {
+    overflow-x: auto; /* Enable horizontal scrolling */
+  }
+
+  .step {
+    min-width: 70px; /* Ensure minimum width for each step */
+  }
+
+  .step p {
+    font-size: 12px;
+  }
+
+  .bullet {
+    width: 15px;
+    height: 15px;
+  }
+
+  .bullet span {
+    font-size: 10px;
+  }
+
+  .check {
+    width: 12px;
+    height: 12px;
+    right: -6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sign-container {
+    width: 100%; /* Full width for mobile devices */
+    padding: 10px;
+  }
+
+  header {
+    font-size: 1.5rem;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+
