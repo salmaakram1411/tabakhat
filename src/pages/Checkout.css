@@ -86,3 +86,97 @@ label {
   margin: 0 auto;
 }
 
+.cart-summary {
+  margin-top: 2rem;
+}
+
+.cart-summary h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  margin-right: 1rem;
+}
+
+.item-details h3 {
+  font-size: 1.7rem;
+  margin: 0;
+}
+
+.item-details p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.address-section {
+  margin-top: 2rem;
+}
+
+.address-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.address-section p {
+  font-size: 1.5rem;
+}
+
+.address-section button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.checkout-input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.payment-options {
+  margin-top: 2rem;
+}
+
+.payment-options label {
+  display: block;
+  font-size: 1.5rem;
+}
+
+.payment-options div {
+  margin-top: 1rem;
+}
+
+.payment-options input {
+  margin-right: 0.5rem;
+}
+
+.small-button {
+  margin-top: 2rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.address-section .changeaddress{
+  margin: 2rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.4rem;
+  cursor: pointer; 
+  color: white;
+  border-radius: 2rem;
+  background-color: var(--main-color);
+}

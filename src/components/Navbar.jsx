@@ -118,10 +118,11 @@ function Navbar() {
         <div className="total">
           <h3>Total Price: EGP{totalPrice}</h3>
         </div>
-        <Link to="/checkout" className="btn">checkout now</Link>
+        <Link to="/checkout" state={{ cartItems, totalPrice }} className="btn">checkout now</Link>
       </div>
     </header>
   );
 }
 
 export default Navbar;
+
