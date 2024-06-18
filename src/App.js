@@ -1,15 +1,17 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
+import Footer from './components/Footer'; // Import Footer
+import Navbar from './components/Navbar';
+import Checkout from './pages/Checkout';
+import Contact from './pages/Contact';
 import Home from './pages/Home';
+import Login from './pages/Login';
+import Menu from './pages/Menu'; // Import Menu component
 import Signupchef from './pages/Signupchef';
 import Signupcustomer from './pages/Signupcustomer';
-import Contact from './pages/Contact';
-import Login from './pages/Login';
-import Checkout from './pages/Checkout';
-import Menu from './pages/Menu'; // Import Menu component
-import './App.css';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer'; // Import Footer
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
         {/* Add more routes here as needed */}
       </Routes>
       <Footer /> {/* Place Footer within the BrowserRouter */}
+        <ToastContainer />
     </BrowserRouter>
   );
 }

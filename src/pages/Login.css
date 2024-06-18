@@ -112,3 +112,10 @@
 .login .register-link p a:hover {
     text-decoration: underline;
 }
+
+.error-login {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 8px;
+    color: #e01e38bc;
+}

@@ -1,20 +1,45 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import axiosConfig from "../services/http";
 import './Signup.css'; // Assuming you have your styles in a separate CSS file
 
 
 const Signupchef = () => {
+  const navigate = useNavigate();
+  const notify = (msg) => toast.success(msg, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
+  const errorNotify = (msg) => toast.error(msg, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
   const [currentStep, setCurrentStep] = useState(1);
   const [socialLinks, setSocialLinks] = useState([""]);
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
     address: "",
-    phoneNumber: "",
+    phone: "",
     gender: "",
-    date: "",
-   
+    birthDate: "",
+    role: "CUSTOMER"
   });
   const [errors, setErrors] = useState({});
 
@@ -23,16 +48,18 @@ const Signupchef = () => {
 
     switch (currentStep) {
       case 1:
-        if (!formData.name) tempErrors.name = "Name is required";
+        if (!formData.firstName) tempErrors.firstName = "First name is required";
+        if (!formData.lastName) tempErrors.lastName = "Last name is required";
         if (!formData.email) tempErrors.email = "Email is required";
         if (!formData.password) tempErrors.password = "Password is required";
+        if (!formData.role) tempErrors.role = "Role is required";
         if (formData.password !== formData.confirmPassword) tempErrors.confirmPassword = "Passwords do not match";
         break;
       case 2:
         if (!formData.address) tempErrors.address = "Address is required";
-        if (!formData.phoneNumber) tempErrors.phoneNumber = "Phone number is required";
+        if (!formData.phone) tempErrors.phone = "Phone number is required";
         if (!formData.gender) tempErrors.gender = "Gender is required";
-        if (!formData.date) tempErrors.date = "Date is required";
+        if (!formData.birthDate) tempErrors.birthDate = "Birth date is required";
         break;
      
       default:
@@ -72,6 +99,29 @@ const Signupchef = () => {
     });
   };
 
+  const HandleSubmit = async (event) => {
+    // Prevent the default form submission behavior
+    event.preventDefault();
+    console.log({formData})
+
+    // Define the login data
+    const loginData = {
+      ...formData
+    };
+
+    // Send a POST request with the login data
+    try {
+      const response = await axiosConfig.post('auth/register', loginData);
+      if (response.status === 200) {
+        notify("User has been registered successfully");
+        navigate("/login")
+      }
+    } catch (error) {
+      errorNotify("User already");
+      console.error('Error:', error);
+    }
+  }
+
   return (
     <div className='signup'>
       <div className="sign-container">
@@ -88,13 +138,18 @@ const Signupchef = () => {
           ))}
         </div>
         <div className="form-outer">
-          <form action="#">
+          <form action="#" onSubmit={HandleSubmit}>
             <div className={`page ${currentStep === 1 ? "slide-page" : ""}`}>
               <div className="sign-title">Basic Info:</div>
               <div className="field">
-                <div className="sign-label">Name</div>
-                <input type="text" name="name" className="signup-input" value={formData.name} onChange={handleChange} required />
-                {errors.name && <p className="error">{errors.name}</p>}
+                <div className="sign-label">First name</div>
+                <input type="text" name="firstName" className="signup-input" value={formData.firstName} onChange={handleChange} required />
+                {errors.firstName && <p className="error">{errors.firstName}</p>}
+              </div>
+              <div className="field">
+                <div className="sign-label">Last name</div>
+                <input type="text" name="lastName" className="signup-input" value={formData.lastName} onChange={handleChange} required />
+                {errors.lastName && <p className="error">{errors.lastName}</p>}
               </div>
               <div className="field">
                 <div className="sign-label">Email</div>
@@ -112,6 +167,16 @@ const Signupchef = () => {
                 {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
               </div>
               <div className="field">
+                <div className="sign-label">Role</div>
+                <select name="role" className="signup-input" value={formData.role} onChange={handleChange} required>
+                  <option value="">Select Role</option>
+                  <option value="CUSTOMER">Customer</option>
+                  <option value="ADMIN">ADMIN</option>
+                  <option value="CHEF">CHEF</option>
+                </select>
+                {errors.gender && <p className="error">{errors.gender}</p>}
+              </div>
+              <div className="field">
                 <button className="firstNext next" onClick={nextStep}>Next</button>
               </div>
             </div>
@@ -125,28 +190,27 @@ const Signupchef = () => {
               </div>
               <div className="field">
                 <div className="sign-label">Phone Number</div>
-                <input type="number" name="phoneNumber" className="signup-input" value={formData.phoneNumber} onChange={handleChange} required />
-                {errors.phoneNumber && <p className="error">{errors.phoneNumber}</p>}
+                <input type="number" name="phone" className="signup-input" value={formData.phone} onChange={handleChange} required />
+                {errors.phone && <p className="error">{errors.phone}</p>}
               </div>
               <div className="field">
                 <div className="sign-label">Gender</div>
                 <select name="gender" className="signup-input" value={formData.gender} onChange={handleChange} required>
                   <option value="">Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
+                  <option value="MALE">Male</option>
+                  <option value="FEMALE">Female</option>
                 </select>
                 {errors.gender && <p className="error">{errors.gender}</p>}
               </div>
               <div className="field">
                 <div className="sign-label">Birthdate</div>
-                <input type="date" name="date" className="signup-input" value={formData.date} onChange={handleChange} required />
-                {errors.date && <p className="error">{errors.date}</p>}
+                <input type="date" name="birthDate" className="signup-input" value={formData.birthDate} onChange={handleChange} required />
+                {errors.birthDate && <p className="error">{errors.birthDate}</p>}
               </div>
               
               <div className="field btns">
-                <button className="prev-3 prev" onClick={prevStep}>Previous</button>
-                <button className="signup-submit" onClick={submitForm}>Submit</button>
+                <button className="prev-3 prev">Previous</button>
+                <button className="signup-submit" type='submit'>Submit</button>
               </div>
              
             </div>
