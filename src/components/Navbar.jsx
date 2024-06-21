@@ -1,18 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './Navbar.css';
 import logo from '../assets/logo.png';
-import egg from '../assets/fried-egg.jpg';
+import './Navbar.css';
 
-function Navbar() {
+function Navbar({cartData, setCartData}) {
   const [isNavbarActive, setIsNavbarActive] = useState(false);
   const [isSearchFormActive, setIsSearchFormActive] = useState(false);
   const [isCartItemsActive, setIsCartItemsActive] = useState(false);
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: 'Fried Egg', price: 25, imgSrc: egg, quantity: 1 },
-    { id: 2, name: 'cart item 02', price: 15, imgSrc: 'pic/pane.jpg', quantity: 1 },
-    { id: 3, name: 'cart item 03', price: 30, imgSrc: 'pic/kofta.jpg', quantity: 1 },
-  ]);
 
   const navigate = useNavigate();
 
@@ -60,18 +54,18 @@ function Navbar() {
   };
 
   const handleIncreaseQuantity = (itemId) => {
-    setCartItems(cartItems.map(item => 
+    setCartData(cartData?.map(item => 
       item.id === itemId ? { ...item, quantity: item.quantity + 1 } : item
     ));
   };
 
   const handleDecreaseQuantity = (itemId) => {
-    setCartItems(cartItems.map(item => 
+    setCartData(cartData?.map(item => 
       item.id === itemId && item.quantity > 1 ? { ...item, quantity: item.quantity - 1 } : item
     ));
   };
 
-  const totalPrice = cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+  const totalPrice = cartData.reduce((total, item) => total + (+item.price * +item.quantity), 0);
 
   return (
     <header className="header">
@@ -88,7 +82,6 @@ function Navbar() {
       </nav>
 
       <div className="icons">
-        <div className="fas fa-search" id="search-btn" onClick={toggleSearchForm}></div>
         <div className="fas fa-shopping-cart" id="cart-btn" onClick={toggleCartItems}></div>
         <div className="fas fa-bars" id="menu-btn" onClick={toggleNavbar}></div>
       </div>
@@ -99,8 +92,8 @@ function Navbar() {
       </div>
 
       <div className={`cart-items-container ${isCartItemsActive ? 'active' : ''}`}>
-        {cartItems.map(item => (
-          <div className="cart-item" key={item.id}>
+        {cartData?.map((item, index) => (
+          <div className="cart-item" key={index}>
             <span className="fas fa-times"></span>
             <img src={item.imgSrc} alt={item.name} />
             <div className="content">
@@ -118,7 +111,7 @@ function Navbar() {
         <div className="total">
           <h3>Total Price: EGP{totalPrice}</h3>
         </div>
-        <Link to="/checkout" state={{ cartItems, totalPrice }} className="btn">checkout now</Link>
+        <Link to="/checkout" state={{ cartData, totalPrice }} className="btn">checkout now</Link>
       </div>
     </header>
   );

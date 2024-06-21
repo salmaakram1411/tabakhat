@@ -28,7 +28,6 @@ const Signupchef = () => {
     theme: "light",
     });
   const [currentStep, setCurrentStep] = useState(1);
-  const [socialLinks, setSocialLinks] = useState([""]);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -102,7 +101,6 @@ const Signupchef = () => {
   const HandleSubmit = async (event) => {
     // Prevent the default form submission behavior
     event.preventDefault();
-    console.log({formData})
 
     // Define the login data
     const loginData = {
@@ -117,7 +115,7 @@ const Signupchef = () => {
         navigate("/login")
       }
     } catch (error) {
-      errorNotify("User already");
+      errorNotify("User already exists");
       console.error('Error:', error);
     }
   }
@@ -165,16 +163,6 @@ const Signupchef = () => {
                 <div className="sign-label">Confirm Password</div>
                 <input type="password" name="confirmPassword" className="signup-input" value={formData.confirmPassword} onChange={handleChange} required />
                 {errors.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
-              </div>
-              <div className="field">
-                <div className="sign-label">Role</div>
-                <select name="role" className="signup-input" value={formData.role} onChange={handleChange} required>
-                  <option value="">Select Role</option>
-                  <option value="CUSTOMER">Customer</option>
-                  <option value="ADMIN">ADMIN</option>
-                  <option value="CHEF">CHEF</option>
-                </select>
-                {errors.gender && <p className="error">{errors.gender}</p>}
               </div>
               <div className="field">
                 <button className="firstNext next" onClick={nextStep}>Next</button>

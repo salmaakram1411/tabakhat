@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import Modal from 'react-modal';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FaTimes } from 'react-icons/fa';
-import './Menu.css';
-import Chef from '../assets/asmaa.PNG';
+import Modal from 'react-modal';
+import { useParams } from 'react-router-dom';
 import egg from '../assets/fried-egg.jpg';
+import axiosConfig, { updateAxiosConfig } from "../services/http";
+import './Menu.css';
 
 const menuData = {
   Breakfast: [
@@ -103,12 +105,72 @@ const reviews = [
   // Add more reviews here
 ];
 
-function Menu() {
+function Menu({cartData, setCartData}) {
   const [selectedCategory, setSelectedCategory] = useState('Breakfast');
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const {id} = useParams();
+  const [chef, setChef] = useState({});
+  const [sections, setSections] = useState([]);
+  const [dishes, setDishes] = useState([]);
+  const [filteredDishes, setFilteredDishes] = useState([]);
+  updateAxiosConfig();
 
-  const handleFilterChange = (category) => {
-    setSelectedCategory(category);
+  useEffect(() => {
+    const response = axios.get(`http://localhost:4000/api/menu-data/${id}`, {headers: {...axiosConfig.headers, authorization: localStorage.getItem("token")}}).then(
+      res => {
+        if (res?.data?.length) {
+          const data = res.data;
+          const chef = data[0];
+          setChef({
+            image: `data:image/png;base64,${chef.chef_image}`,
+            description: chef.description,
+            chefFirstName: chef.first_name,
+            chefLastName: chef.last_name,
+            id: chef.chef_id
+          });
+          let responseSections = data.map(item => {
+              return {name: item.section_name, id: item.section_id}
+          });
+          responseSections = responseSections.reduce((acc, item) => {
+            if (acc.findIndex(sec => sec.id === item.id ) === -1) {
+              acc.push(item);
+            }
+            return acc;
+          }, []);
+          
+          setSections(responseSections);
+          setSelectedCategory(responseSections[0].name)
+          let responseDishes = data.map(
+            item => {
+              return {
+                image: `data:image/png;base64,${item.dish_image}`, 
+                name: item.dish_name, 
+                id: item.dish_id, 
+                price: item.dish_price, 
+                description: item.dish_description,
+                sectionId: item.dish_section_id
+              }
+            }
+          );
+          const filtered = responseDishes.filter(dish => dish.sectionId === responseSections[0].id);
+          setDishes(responseDishes);
+          setFilteredDishes(filtered)
+        }
+      }
+    ).catch(err => console.log(err));
+
+  }, []);
+
+  const addDish = (dish) => {
+    if (cartData?.findIndex(item => item.id === dish.id) === -1) setCartData([...cartData, {...dish, quantity: 1}]);
+  }
+
+  const handleFilterChange = (section) => {
+    setSelectedCategory(section.name);
+    const filtered = dishes.filter(dish => {
+      return dish.sectionId === section.id
+    });
+    setFilteredDishes(filtered);
   };
 
   const openModal = () => {
@@ -132,44 +194,37 @@ function Menu() {
               <BsStarHalf />
             </div>
           </div>
-          <h1><span>chef.</span> <br />Asmaa Oraby</h1>
+          <h1><span>chef.</span> <br />{chef.chefFirstName} {chef.chefLastName}</h1>
           <p>
-            A passionate home chef with a flair for both baking and cooking.
-            Specializing in a fusion of sweet and savory flavors, she offers a
-            diverse menu of homemade delights, from indulgent cakes and pastries
-            to flavorful Egyptian-inspired dishes.
+            {chef.description}
           </p>
           <h2 onClick={openModal} style={{ cursor: 'pointer' }}>(Reviews)</h2>
           <a href="#menu" className="btn">Check menu</a>
         </div>
         <div className="chefP-img">
-          <img src={Chef} alt='Chef Asmaa Oraby' />
+          <img src={chef.image} alt='Chef Asmaa Oraby' />
         </div>
       </div>
       <section className="menu" id="menu">
         <div className="nav-menu">
-          <a href="#s" onClick={() => handleFilterChange('Breakfast')}>Breakfast</a>
-          <a href="#s" onClick={() => handleFilterChange('Launch')}>Launch</a>
-          <a href="#s" onClick={() => handleFilterChange('Dinner')}>Dinner</a>
-          <a href="#s" onClick={() => handleFilterChange('Desserts')}>Desserts</a>
-          <a href="#s" onClick={() => handleFilterChange('Occasions')}>Occasions</a>
+          {sections.map((item, index) => <a href="#s" key={index} onClick={() => handleFilterChange(item)}>{item.name}</a>)}
         </div>
         <div className="menu-items">
-          {Object.keys(menuData).map((category) => (
+          {sections.map((section, index) => (
             <div
-              className={`menu-category ${selectedCategory === category ? 'active' : ''}`}
-              style={{ display: selectedCategory === category ? 'block' : 'none' }}
-              key={category}
+              className={`menu-category ${selectedCategory === section.name ? 'active' : ''}`}
+              style={{ display: selectedCategory === section.name ? 'block' : 'none' }}
+              key={index}
             >
-              <h1 className="heading">{category}</h1>
+              <h1 className="heading">{section.name}</h1>
               <div className="box-container">
-                {menuData[category].map((item, index) => (
+                {filteredDishes.map((item, index) => (
                   <div className="box" key={index}>
-                    <img src={item.img} alt={item.name} />
+                    <img src={item.image} alt={item.name} />
                     <h3>{item.name}</h3>
                     <p>{item.description}</p>
                     <div className="price">{item.price}</div>
-                    <a href="#s1" className="box-btn">Add to cart</a>
+                    <a className="box-btn cursor-pointer" onClick={() => {addDish(item)}}>Add to cart</a>
                   </div>
                 ))}
               </div>

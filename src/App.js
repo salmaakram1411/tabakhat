@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -14,16 +14,17 @@ import Signupchef from './pages/Signupchef';
 import Signupcustomer from './pages/Signupcustomer';
 
 function App() {
+  const [cartData, setCartData] = useState([]);
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar cartData={cartData} setCartData={setCartData} />
       <Routes>
         <Route path="/" element={<Home />} /> 
         <Route path="/Home" element={<Home />} />
         <Route path="/Contact" element={<Contact />} /> 
         <Route path="/Login" element={<Login />} />
         <Route path="/Checkout" element={<Checkout />} />
-        <Route path="/Menu" element={<Menu />} /> 
+        <Route path="/Menu/:id" element={<Menu cartData={cartData} setCartData={setCartData} />} /> 
         <Route path="/Signupchef" element={<Signupchef />} /> 
         <Route path="/Signupcustomer" element={<Signupcustomer />} /> 
         {/* Add more routes here as needed */}

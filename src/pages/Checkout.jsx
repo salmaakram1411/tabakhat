@@ -1,21 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import './Checkout.css';
 
+const axiosConf = axios.create({
+  baseURL: "http://localhost:4000/api/",
+  headers: {
+    authorization: localStorage.getItem("token")
+  }
+})
+
 const Checkout = () => {
+  const navigate = useNavigate();
+  const notify = (msg) => toast.success(msg, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
+  const errorNotify = (msg) => toast.error(msg, {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
   const location = useLocation();
-  const { cartItems, totalPrice } = location.state || { cartItems: [], totalPrice: 0 };
+  const { cartData, totalPrice } = location.state || { cartData: [], totalPrice: 0 };
 
   const [paymentMethod, setPaymentMethod] = useState('');
   const [receipt, setReceipt] = useState(null);
+  const [comment, setComment] = useState("");
+
+  const userData = JSON.parse(localStorage.getItem("user"))?.user;
 
   // Mock user data
   const userAddress = {
-    name: 'John Doe',
-    address: '1234 Main St',
-    city: 'Springfield',
-    state: 'IL',
-    zip: '62704'
+    name: userData?.name,
+    address: userData?.address
   };
 
   const [isEditingAddress, setIsEditingAddress] = useState(false);
@@ -57,13 +87,54 @@ const Checkout = () => {
  
     formSubmissionData.append('payment', paymentMethod);
     formSubmissionData.append('deliveryTime', deliveryTime);
-    if (paymentMethod === 'fawry' && receipt) {
+    if (paymentMethod === 'vod' && receipt) {
       formSubmissionData.append('receipt', receipt);
     }
-
-    console.log('Form data:', Object.fromEntries(formSubmissionData.entries()));
-    alert('Form submitted!');
+    axiosConf.post("orders", {
+      dishes: cartData.map(item => +item.id),
+      deliveryTime: (new Date(deliveryTime).toISOString()).split("T")[0]
+    }).then(
+      res => {
+        if (res?.data?.orderId) {
+          const orderId = res.data.orderId;
+          axiosConf.post("customer-pay", {
+            orderId,
+            method: paymentMethod,
+            amountPaid: totalPrice,
+            totalCost: totalPrice
+          }).then(
+            res => {
+              if (res?.data?.msg) {
+                if (paymentMethod === "VODAFONE_CASH") {
+                  const formData = new FormData();
+                  formData.append("image", receipt);
+                  axiosConf.post(`wallet-proof/${res.data?.paymentId}`, formData)
+                    .then(res => {
+                      if (comment) submitComment(orderId);
+                      notify("Order has been submitted successfully");
+                      navigate("/")
+                    });
+                } else {
+                  if (comment) submitComment(orderId);
+                  notify("Order has been submitted successfully");
+                  navigate("/")
+                }
+              }
+            }
+          ).catch(err => errorNotify("Something went wrong"))
+        }
+      }
+    ).catch(err => errorNotify("Something went wrong"))
   };
+
+  function submitComment(orderId) {
+    axiosConf.post(`comments/${orderId}`)
+      .then()
+  }
+
+  function updateComment(event) {
+    setComment(event.target.value)
+  }
 
   return (
     <div className="checkout-body">
@@ -72,7 +143,7 @@ const Checkout = () => {
 
         <div className="cart-summary">
           <h2>Order Summary</h2>
-          {cartItems.map(item => (
+          {cartData.map(item => (
             <div key={item.id} className="cart-item">
               <img src={item.imgSrc} alt={item.name} />
               <div className="item-details">
@@ -113,25 +184,13 @@ const Checkout = () => {
                   required
                 />
               </div>
-              <div className="form-group">
-                <label htmlFor="city">City:</label>
-                <input
-                  type="text"
-                  className="checkout-input"
-                  id="city"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
        
             </form>
           ) : (
             <div>
               <p><strong>Name:</strong> {userAddress.name}</p>
               <p><strong>Address:</strong> {userAddress.address}</p>
-              <p><strong>City:</strong> {userAddress.city}</p>
+              {/* <p><strong>City:</strong> {userAddress.city}</p> */}
             
               <button className='changeaddress' onClick={() => setIsEditingAddress(true)}>Change Address</button>
             </div>
@@ -152,6 +211,18 @@ const Checkout = () => {
               min={minDeliveryTime}
             />
           </div>
+          <div className="form-group">
+                <label htmlFor="city">Comment:</label>
+                <input
+                  type="text"
+                  className="checkout-input"
+                  id="comment"
+                  name="comment"
+                  value={comment}
+                  onChange={updateComment}
+                  required
+                />
+              </div>
 
           <div className="form-group payment-options">
             <label>Payment Method:</label>
@@ -160,27 +231,29 @@ const Checkout = () => {
                 type="radio" 
                 id="cash" 
                 name="payment" 
-                value="cash" 
-                checked={paymentMethod === 'cash'} 
+                value="CASH" 
+                checked={paymentMethod === 'CASH'} 
                 onChange={handlePaymentChange} 
+                required
               />
               <label htmlFor="cash">Cash on Delivery</label>
             </div>
             <div>
               <input 
                 type="radio" 
-                id="fawry" 
+                id="vod" 
                 name="payment" 
-                value="fawry" 
-                checked={paymentMethod === 'fawry'} 
+                value="VODAFONE_CASH" 
+                checked={paymentMethod === 'VODAFONE_CASH'} 
                 onChange={handlePaymentChange} 
+                required
               />
-              <label htmlFor="fawry">Fawry</label>
+              <label htmlFor="vod">Vodafone Cash</label>
             </div>
           </div>
-          {paymentMethod === 'fawry' && (
+          {paymentMethod === 'VODAFONE_CASH' && (
             <div className="form-group">
-              <label htmlFor="receipt">Upload Fawry Receipt:</label>
+              <label htmlFor="receipt">Upload Vodafone cash Receipt:</label>
               <input 
                 type="file" 
                 id="receipt" 
@@ -192,7 +265,7 @@ const Checkout = () => {
               />
             </div>
           )}
-          <button type="submit" className="small-button">Submit Order</button>
+          <button type="submit" disabled={!paymentMethod} className={`small-button ${(!paymentMethod || (paymentMethod === "VODAFONE_CASH" && !receipt)) ? 'disabled' : ''}`}>Submit Order</button>
         </form>
       </div>
     </div>

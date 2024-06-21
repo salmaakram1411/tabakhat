@@ -1,9 +1,8 @@
 import React from 'react';
-import './Home.css';
 import About from '../components/About';
-import homep from '../assets/home.png';
 import Chefswiper from '../components/Chefswiper.js'; // Correct case
 import Joinus from '../components/Joinus.jsx';
+import './Home.css';
 
 
 function Home() {
@@ -48,15 +47,7 @@ function Home() {
       <h2>customer support</h2>
       <p>Experience exceptional customer support, always here to assist you and ensure your satisfaction with every order</p>
       </div>
-        </div>        
-        
-        
-
-        
-
-       
-      
-        
+        </div>
       </div>
     <Chefswiper />
     <About />
