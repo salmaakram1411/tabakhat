@@ -92,7 +92,8 @@ const Checkout = () => {
     }
     axiosConf.post("orders", {
       dishes: cartData.map(item => +item.id),
-      deliveryTime: (new Date(deliveryTime).toISOString()).split("T")[0]
+      deliveryTime: (new Date(deliveryTime).toISOString()).split("T")[0],
+      address: formData.address
     }).then(
       res => {
         if (res?.data?.orderId) {
@@ -128,7 +129,10 @@ const Checkout = () => {
   };
 
   function submitComment(orderId) {
-    axiosConf.post(`comments/${orderId}`)
+    axiosConf.post(`comment`, {
+      orderId,
+      comment
+    })
       .then()
   }
 
@@ -220,7 +224,6 @@ const Checkout = () => {
                   name="comment"
                   value={comment}
                   onChange={updateComment}
-                  required
                 />
               </div>
 

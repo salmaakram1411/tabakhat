@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axiosConfig from '../services/http';
 import './Signup.css'; // Assuming you have your styles in a separate CSS file
 
 
 const Signupchef = () => {
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
   const [socialLinks, setSocialLinks] = useState([""]);
   const [formData, setFormData] = useState({
@@ -18,7 +21,6 @@ const Signupchef = () => {
     cv: null,
     description: "",
     paymentReceipt: null,
-    subscription: "Ordinary"
   });
   const [errors, setErrors] = useState({});
 
@@ -71,9 +73,50 @@ const Signupchef = () => {
 
   const submitForm = (e) => {
     e.preventDefault();
+    const name = formData.name?.split(" ");
     if (validateStep()) {
-      alert("Your Form Successfully Signed up, we will reach you later");
-      window.location.reload();
+      axiosConfig.post("auth/register", {
+        ...formData,
+        firstName: name[0],
+        lastName: name[1],
+        phone: formData.phoneNumber,
+        birthDate: formData.date,
+        socialMediaPlatform: socialLinks,
+        role: "CHEF",
+      }).then(
+        res => {
+          if (res?.data?.msg === "User already exists") {
+            alert(res.data.msg);
+            return;
+          }
+          if (res?.data?.chefId) {
+            const chefId = res.data.chefId;
+            const cvFormData = new FormData();
+            cvFormData.append("file", formData.cv)
+            axiosConfig.post(`chef-cv/${chefId}`, cvFormData)
+              .then(
+                res => {
+                  const imageFormData = new FormData();
+                  imageFormData.append("image", formData.profilePicture);
+                  axiosConfig.post(`chef-image/${chefId}`, imageFormData)
+                    .then(
+                      res => {
+                        const receipt = new FormData();
+                        receipt.append("file", formData.paymentReceipt)
+                        axiosConfig.post(`chef-receipt/${chefId}`, receipt)
+                          .then(
+                            res => {
+                              alert("Chef has been registered successfully");
+                              window.location.href = "http://localhost:3001"
+                            }
+                          )
+                      }
+                    )
+                }
+              )
+          }
+        }
+      )
     }
   };
 
@@ -158,9 +201,8 @@ const Signupchef = () => {
                 <div className="sign-label">Gender</div>
                 <select name="gender" className="signup-input" value={formData.gender} onChange={handleChange} required>
                   <option value="">Select Gender</option>
-                  <option value="Male">Male</option>
-                  <option value="Female">Female</option>
-                  <option value="Other">Other</option>
+                  <option value="MALE">Male</option>
+                  <option value="FEMALE">Female</option>
                 </select>
                 {errors.gender && <p className="error">{errors.gender}</p>}
               </div>
@@ -199,12 +241,6 @@ const Signupchef = () => {
                       placeholder="https://example.com"
                       required
                     />
-                    {errors[`socialLink${index}`] && <p className="error">{errors[`socialLink${index}`]}</p>}
-                    {socialLinks.length > 1 && (
-                      <button type="button" onClick={() => removeSocialLink(index)}>
-                        Remove
-                      </button>
-                    )}
                   </div>
                 ))}
                 <button type="button" onClick={addSocialLink}>Add Another Link</button>
@@ -222,13 +258,6 @@ const Signupchef = () => {
 
             <div className={`page ${currentStep === 4 ? "slide-page" : ""}`}>
               <div className="sign-title">Payment Details:</div>
-              <div className="field">
-                <div className="sign-label">Subscription</div>
-                <select name="subscription" className="signup-input" value={formData.subscription} onChange={handleChange}>
-                  <option>Ordinary</option>
-                  <option>Premium</option>
-                </select>
-              </div>
               <div className="field">
                 <div className="sign-label">Payment Receipt</div>
                 <input type="file" className="signup-input"  name="paymentReceipt" onChange={handleChange} required />
