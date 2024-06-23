@@ -65,6 +65,10 @@ function Navbar({cartData, setCartData}) {
     ));
   };
 
+  const handleRemoveItem = (itemId) => {
+    setCartData(cartData?.filter(item => item.id !== itemId));
+  };
+
   const totalPrice = cartData.reduce((total, item) => total + (+item.price * +item.quantity), 0);
 
   return (
@@ -94,8 +98,8 @@ function Navbar({cartData, setCartData}) {
       <div className={`cart-items-container ${isCartItemsActive ? 'active' : ''}`}>
         {cartData?.map((item, index) => (
           <div className="cart-item" key={index}>
-            <span className="fas fa-times"></span>
-            <img src={item.image} alt={item.name} />
+            <span className="fas fa-times" onClick={() => handleRemoveItem(item.id)}></span>
+            <img src={item.imgSrc} alt={item.name} />
             <div className="content">
               <h3>{item.name}</h3>
               <div className="price">EGP{item.price}</div>
@@ -118,4 +122,3 @@ function Navbar({cartData, setCartData}) {
 }
 
 export default Navbar;
-
