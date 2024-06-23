@@ -149,7 +149,7 @@ const Checkout = () => {
           <h2>Order Summary</h2>
           {cartData.map(item => (
             <div key={item.id} className="cart-item">
-              <img src={item.imgSrc} alt={item.name} />
+              <img src={item.image} alt={item.name} />
               <div className="item-details">
                 <h3>{item.name}</h3>
                 <p>Quantity: {item.quantity}</p>

@@ -95,7 +95,7 @@ function Navbar({cartData, setCartData}) {
         {cartData?.map((item, index) => (
           <div className="cart-item" key={index}>
             <span className="fas fa-times"></span>
-            <img src={item.imgSrc} alt={item.name} />
+            <img src={item.image} alt={item.name} />
             <div className="content">
               <h3>{item.name}</h3>
               <div className="price">EGP{item.price}</div>
